@@ -1,13 +1,8 @@
-# StrikePoint AI
+# StrikePoint AI Legal Index
 
-Privacy-first, offline-capable AI fishing companion.
+Welcome to the StrikePoint AI legal hub. As a privacy-first, fully offline application, your data never leaves your device unless you explicitly export it.
 
-## Features
-- On-device AI Analysis
-- - Offline Expedition Mode
-  - - Zero-Trust Privacy
-    - - AI Species ID
-      - - Unified Location Intents
-       
-        - For more information, see the documentation.
-        - 
+Review our documentation below:
+
+*   [Privacy Policy](privacy.md)
+*   [Terms and Conditions](terms.md)
