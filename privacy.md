@@ -1,67 +1,192 @@
 # Privacy Policy — StrikePoint AI
 
-**Last Updated:** April 8, 2026
-**Developer:** YYIIMMIIYY LLC
+**Last Updated:** April 18, 2026
+**Developer:** Goodhope Technologies LLC
+
+---
 
 ## Overview
 
-At YYIIMMIIYY LLC, we built StrikePoint AI to be a premium, off-grid survival technology. Because you may rely on it in remote locations, privacy and data sovereignty are foundational to the application. This Privacy Policy outlines our data practices for the StrikePoint AI mobile application.
+StrikePoint AI is designed from the ground up for anglers who take their privacy seriously.
+Your catch logs, waypoints, photos, and AI conversations are stored exclusively on your
+device — they never touch Goodhope Technologies LLC servers. This policy explains precisely what data
+is processed, where it goes, and what control you have over it.
 
-## 1. Local Data Storage & AI Processing
+---
 
-StrikePoint AI is designed to keep your personal data under your control. While the application connects to the internet to fetch real-time environmental data, we **do not** collect, transmit, or store your personal data, catch logs, waypoints, photos, or forecasting queries on any external servers owned by YYIIMMIIYY LLC. The LLM (AI) inference runs 100% offline on your device's hardware.
+## 1. Your Fishing Data — Stays on Your Device
 
-All of your data is stored locally on your device within a secured, encrypted SQLite database. 
+Goodhope Technologies LLC does not collect, transmit, or store your personal fishing data on any
+external servers. This includes:
+
+- Catch logs (species, weight, location, photos)
+- GPS waypoints and secret fishing spots
+- AI chat conversations
+- Digital tackle inventory
+- Audio recordings from voice input
+
+All of this data lives in an AES-256 encrypted SQLite database on your device. The
+AI inference (Llama 3.2) runs entirely on your device's CPU/RAM — your queries are never
+sent to a cloud service for processing.
+
+---
 
 ## 2. Location Data (GPS)
 
-To provide precise Solunar forecasts, atmospheric pressure aggregation, and waypoint logging, StrikePoint AI requires access to your device's GPS and location services.
-* **Local Processing:** Your exact GPS coordinates are used exclusively on your device to execute local heuristics.
-* **No External Tracking:** We never transmit your location data to our servers, nor do we sell or share it with third parties.
+StrikePoint AI requires access to your device's GPS to provide accurate solunar forecasts,
+environmental data aggregation, and waypoint logging.
 
-## 3. Social Sharing & Media Export
+**What we do with your coordinates:**
 
-StrikePoint AI includes a feature to generate and share "Trophy Cards" of your log entries.
-* **Location Redaction:** When exporting a Trophy Card image, the rendering engine explicitly strips your exact coordinates and the water body name. The exported image will not contain embedded GPS EXIF data or textual location data, mathematically guaranteeing your spots remain secret.
-* **OS Distribution:** The rendered image is passed directly to your device's native sharing sheet. You maintain full control over which apps or contacts receive the image.
+| Purpose | Transmitted externally? | Details |
+|---|---|---|
+| Solunar calculations | No | Pure offline math on-device |
+| Weather forecast | Yes | Sent to Open-Meteo API to return your local forecast |
+| EPA water quality | Yes | Sent to EPA WQX API to find nearest monitoring station |
+| Air quality index | Yes | Sent to Open-Meteo AQI API |
+| Biodiversity occurrences | Yes | Sent to GBIF API as a bounding box |
+| Nearby water bodies | Yes | Sent to OpenStreetMap Overpass API |
+| Reverse geocoding | Yes | Sent to Nominatim API to resolve water body name |
+| Offline marine conditions | Yes | Sent to Open-Meteo Marine API |
+| River flow (USGS/ECCC) | No | Queried by station ID only — coordinates not transmitted |
+| NOAA tides (US coasts) | No | Queried by station ID only — coordinates not transmitted |
+| CHS tides (Canadian coasts) | No | Queried by CHS station code only — coordinates not transmitted |
+| Waypoints and catch logs | No | Stored locally only, never transmitted |
+
+When coordinates are transmitted to third-party APIs, they are used only to return
+environmental data for your current session. Goodhope Technologies LLC does not retain, sell, or
+share these coordinates. The third-party services (Open-Meteo, EPA, GBIF, OpenStreetMap,
+Nominatim) have their own privacy policies governing momentary request processing.
+
+---
+
+## 2a. On-Device Fish ID (Vision Service)
+
+When you capture a photo through the in-app **Fish ID camera**, the entire image-analysis
+pipeline runs on your device:
+
+- The photo is compressed and centre-cropped to a 4:5 portrait format **on-device** in a
+  background isolate.
+- If the optional fish-classifier model is bundled with your build, species classification
+  runs locally via TensorFlow Lite. The image is resized to 224×224, the inference runs
+  inside a sandboxed isolate, and the result (top species + confidence) is returned to the
+  UI without any network call.
+- **Photos and inference results are never uploaded.** Goodhope Technologies LLC has no servers that
+  receive catch images.
+- Temporary compressed working files are deleted after inference; the original capture is
+  retained only if you choose to attach it to a logged catch.
+
+When the classifier is not bundled (the default for open-source builds), the camera screen
+honestly reports "On-device Fish ID model not bundled" and lets you log the catch manually.
+We do not silently fall back to a cloud service.
+
+---
+
+## 3. Social Sharing & Trophy Cards
+
+StrikePoint AI includes a "Trophy Card" feature to share catch images.
+
+- **Location redaction:** The rendering engine strips exact GPS coordinates and precise
+  water body names from exported images. Exported images contain no embedded EXIF GPS data.
+- **You control distribution:** The rendered image is passed to your device's native sharing
+  sheet. You choose which apps or contacts receive it.
+
+---
 
 ## 4. Data Backups & Encryption
 
-If you choose to export your data using StrikePoint AI's Backup & Restore feature, the app generates an AES-256 encrypted `.spai` archive. 
-* The password you set is never transmitted to us.
-* The backup file remains on your device or wherever you manually choose to share it (e.g., iCloud Drive, local storage, email). We cannot recover your data if you lose your password.
+The Backup & Restore feature exports an AES-256-CBC encrypted `.spai` archive.
 
-## 5. Third-Party Services 
+- Your password is never transmitted to us and cannot be recovered.
+- The archive includes your encrypted database and the database encryption key. The entire
+  archive (key included) is sealed inside an AES-256-CBC envelope whose key is derived from
+  your backup password via PBKDF2-HMAC-SHA256 (100,000 iterations). The archive is also
+  HMAC-SHA256 authenticated. Without your backup password, neither the database key nor the
+  database itself can be recovered. See [Security Reference §2](security.md) for the full
+  binary format.
+- **Store your backup password in a secure password manager.** If lost, the archive
+  cannot be decrypted and your data cannot be restored from it.
+- The backup file stays on your device or wherever you manually choose to save it
+  (iCloud Drive, Google Drive, local storage). Goodhope Technologies LLC never receives it.
 
-While YYIIMMIIYY LLC does not collect your data, the app relies on specific third-party infrastructure to function:
+---
 
-### Environmental Data Aggregation
-When you have internet access, StrikePoint AI fetches real-time environmental data from various public and third-party APIs (including Open-Meteo, USGS, EPA, OpenStreetMap, GBIF, and Environment Canada WaterOffice). Your IP address and request coordinates may be processed momentarily by their respective servers strictly to return the contextual data necessary for your forecast. GBIF biodiversity occurrence data is licensed under CC-BY and is attributed accordingly.
+## 5. Free-Tier Usage Quota
 
-### Firebase Analytics & Conversion Tracking
-While we do not track your fishing data, we do use **Google Firebase Analytics** strictly to track aggregate app installations and purchase conversions for the "Pro" lifetime unlock. The data sent to Firebase is strictly limited to conversion events (e.g., `purchase_success`, `paywall_view`) and does not include any geographical tracking, PII (Personally Identifiable Information), or usage telemetry inside the core application. See [Google's Privacy Policy](https://policies.google.com/privacy).
+Free-tier users may submit up to **3 AI queries per 7-day rolling window**. This counter
+is stored on your device in hardware-backed encrypted storage (`FlutterSecureStorage`) —
+it is never transmitted to our servers. Purchasing the Pro lifetime unlock removes this
+limit permanently.
+
+---
+
+## 6. Third-Party Services
+
+### Environmental Data APIs
+When you are online, StrikePoint AI fetches real-time environmental data from public APIs
+(Open-Meteo, USGS, EPA WQX, OpenStreetMap, GBIF, Environment Canada, Nominatim). Your
+approximate GPS coordinates may be included in these requests as described in Section 2.
+GBIF biodiversity occurrence data is licensed under CC-BY and is attributed accordingly
+within the app.
+
+### Firebase Analytics
+We use **Google Firebase Analytics** to track aggregate, anonymous app-level events:
+`purchase_success`, `paywall_view`, and `app_open`. These events do not include your GPS
+coordinates, catch data, photos, or any personally identifiable information.
+
+You can disable analytics collection at any time under **Settings → Privacy → Usage
+Analytics**. When disabled, no events are buffered or transmitted — the setting takes
+effect immediately and persists across app restarts.
 
 ### Firebase Crashlytics
-We use **Google Firebase Crashlytics** to automatically collect anonymous crash reports when the app encounters an unexpected error. Crash reports contain a stack trace, device model, OS version, and app version. They do not contain your catch data, GPS coordinates, photos, or any personally identifiable information. Crash reporting helps us fix bugs quickly and improve app stability. You can opt out by disabling analytics in your device settings. See [Google's Privacy Policy](https://policies.google.com/privacy).
+We use **Google Firebase Crashlytics** to collect anonymous crash reports when the app
+encounters an unexpected error. Reports contain a stack trace, device model, OS version,
+and app version. They do not contain your catch data, GPS coordinates, photos, or any
+personally identifiable information.
+
+You can disable crash reporting at any time under **Settings → Privacy → Crash Reporting**.
+When disabled, no crash data is uploaded. The setting takes effect immediately and
+persists across app restarts.
+
+Both Firebase services are subject to [Google's Privacy Policy](https://policies.google.com/privacy).
 
 ### App Stores (Apple & Google)
-Payments are processed entirely through the Apple App Store or Google Play Store. Payment information (such as credit card details) is never shared with us. Crash reports and anonymous usage telemetry may be collected natively by Apple or Google depending on your OS-level diagnostic settings.
+Payments are processed entirely through the Apple App Store or Google Play Store. Payment
+information is never shared with us. Crash reports and anonymous usage telemetry may be
+collected natively by Apple or Google depending on your OS-level diagnostic settings.
 
-## 6. Children's Privacy
+---
 
-StrikePoint AI is designed for a general audience. We do not knowingly collect personal information from children under the age of 13.
+## 7. Children's Privacy
 
-## 7. Your Rights & Data Deletion
+StrikePoint AI is designed for a general audience. We do not knowingly collect personal
+information from children under the age of 13.
 
-Because you control 100% of your data:
-* You can delete all your records instantly by navigating to the App Settings and purging your local cache.
-* You can permanently destroy all application data by simply uninstalling StrikePoint AI from your device.
+---
 
-## 8. Changes to This Policy
+## 8. Your Rights & Data Deletion
 
-We may update this privacy policy from time to time as we introduce new features. Changes will be reflected by updating the "Last Updated" date above.
+Because you control 100% of your fishing data:
 
-## 9. Contact
+- **Delete records:** Navigate to Settings → Data & Diagnostics → Clear AI Chat History to
+  remove AI conversations. Uninstalling the app permanently destroys all locally stored data.
+- **Disable analytics:** Settings → Privacy → Usage Analytics (off = zero data collected).
+- **Disable crash reporting:** Settings → Privacy → Crash Reporting (off = zero data
+  uploaded).
+- **Export your data:** Use Backup & Restore to create an encrypted portable archive before
+  switching devices.
+
+---
+
+## 9. Changes to This Policy
+
+We may update this policy as we introduce new features. Changes will be reflected by
+updating the "Last Updated" date above. Significant changes will be communicated via an
+in-app notice.
+
+---
+
+## 10. Contact
 
 For questions or concerns about this privacy policy, please contact:
 **Email:** support@yyiimmiiyy.com
