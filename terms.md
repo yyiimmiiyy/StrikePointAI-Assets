@@ -1,6 +1,6 @@
 # Terms & Conditions — StrikePoint AI
 
-**Last Updated:** April 18, 2026
+**Last Updated:** April 19, 2026
 **Provider:** Goodhope Technologies LLC
 
 ---
@@ -45,9 +45,9 @@ provided by the App must be viewed as generalized context only.
 ### Free Tier
 
 StrikePoint AI is free to download and includes access to the full offline atlas, tackle
-box, catch logger, waypoint system, and solunar forecasts. Free-tier users may submit up
-to **3 AI queries per 7-day rolling window**. This limit resets automatically at the end
-of each 7-day period.
+box, catch logger, waypoint system, and solunar forecasts. Free-tier users receive
+**30 AI queries during the first 7 days after install**, then **7 queries per rolling
+7-day window** thereafter. The rolling window advances automatically with each query.
 
 ### Pro Lifetime Unlock
 
@@ -58,7 +58,6 @@ unlocks:
 - Unlimited AI interactions
 - Unlimited digital tackle box storage
 - Persistent chat history with semantic memory
-- Priority access to new Pro-exclusive features
 
 **Billing:** All payments are processed securely through the Apple App Store or Google Play
 Store. Goodhope Technologies LLC does not process or store your payment information.
@@ -128,4 +127,4 @@ constitutes acceptance of the modified terms.
 ## 11. Contact
 
 For questions regarding these Terms & Conditions:
-**Email:** support@yyiimmiiyy.com
+**Email:** support@goodhopetech.com

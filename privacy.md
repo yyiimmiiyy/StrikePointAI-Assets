@@ -1,6 +1,6 @@
 # Privacy Policy — StrikePoint AI
 
-**Last Updated:** April 18, 2026
+**Last Updated:** April 19, 2026
 **Developer:** Goodhope Technologies LLC
 
 ---
@@ -48,10 +48,14 @@ environmental data aggregation, and waypoint logging.
 | Nearby water bodies | Yes | Sent to OpenStreetMap Overpass API |
 | Reverse geocoding | Yes | Sent to Nominatim API to resolve water body name |
 | Offline marine conditions | Yes | Sent to Open-Meteo Marine API |
-| River flow (USGS/ECCC) | No | Queried by station ID only — coordinates not transmitted |
-| NOAA tides (US coasts) | No | Queried by station ID only — coordinates not transmitted |
-| CHS tides (Canadian coasts) | No | Queried by CHS station code only — coordinates not transmitted |
+| River flow (USGS/ECCC) | No | Queried by station ID only — coordinates not transmitted¹ |
+| NOAA tides (US coasts) | No | Queried by station ID only — coordinates not transmitted¹ |
+| CHS tides (Canadian coasts) | No | Queried by CHS station code only — coordinates not transmitted¹ |
 | Waypoints and catch logs | No | Stored locally only, never transmitted |
+
+¹ Station IDs are discovered on-device from the pre-bundled public hotspot atlas
+(52,929 rows of government-sourced gauge/tidal stations). No coordinates are sent to
+USGS, NOAA, ECCC, or CHS for that discovery step.
 
 When coordinates are transmitted to third-party APIs, they are used only to return
 environmental data for your current session. Goodhope Technologies LLC does not retain, sell, or
@@ -113,10 +117,10 @@ The Backup & Restore feature exports an AES-256-CBC encrypted `.spai` archive.
 
 ## 5. Free-Tier Usage Quota
 
-Free-tier users may submit up to **3 AI queries per 7-day rolling window**. This counter
-is stored on your device in hardware-backed encrypted storage (`FlutterSecureStorage`) —
-it is never transmitted to our servers. Purchasing the Pro lifetime unlock removes this
-limit permanently.
+Free-tier users receive **30 AI queries during the first 7 days after install**, then
+**7 queries per rolling 7-day window** thereafter. This counter is stored on your device
+in hardware-backed encrypted storage (`FlutterSecureStorage`) — it is never transmitted
+to our servers. Purchasing the Pro lifetime unlock removes this limit permanently.
 
 ---
 
@@ -189,4 +193,4 @@ in-app notice.
 ## 10. Contact
 
 For questions or concerns about this privacy policy, please contact:
-**Email:** support@yyiimmiiyy.com
+**Email:** support@goodhopetech.com

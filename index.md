@@ -1,6 +1,6 @@
 # StrikePoint AI — Documentation Index
 
-**Last Updated:** April 18, 2026
+**Last Updated:** April 19, 2026
 
 StrikePoint AI is an offline-capable AI fishing assistant built by Goodhope Technologies LLC.
 Your catch logs, waypoints, photos, and AI conversations are stored exclusively on your
@@ -27,6 +27,8 @@ retrieve local conditions — they are never retained or sold by Goodhope Techno
 | [RAG Services API](rag_services_api.md) | All 21 data sources injected into the LLM context — endpoints, gating, and failure contracts |
 | [PublicWaypointService](public_waypoint_service.md) | Offline hotspot atlas, telemetry station discovery, and spatial query design |
 | [Security Reference](security.md) | Encryption, backup security model, HTTPS enforcement, and privacy controls |
+| [fllama Fork Backup](fllama-fork-backup.md) | Patch list, file paths, and rebase procedure for the custom fllama fork |
+| [Launch Submission Checklist](fishing-app-launch-submission-list.md) | App Store + Play Console submission checklist and go/no-go gates |
 
 ---
 
@@ -49,4 +51,4 @@ retrieve local conditions — they are never retained or sold by Goodhope Techno
 | **Free tier** | Full offline atlas + catch logger; 30 AI queries during the first week after install, then 7 per 7-day rolling window |
 | **Pro unlock** | One-time $19.99 — unlimited AI + unlimited tackle storage |
 | **Privacy analytics** | Firebase Analytics/Crashlytics — opt-out in Settings → Privacy |
-| **Developer** | Goodhope Technologies LLC · support@yyiimmiiyy.com |
+| **Developer** | Goodhope Technologies LLC · support@goodhopetech.com |
