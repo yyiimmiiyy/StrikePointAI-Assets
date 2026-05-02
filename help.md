@@ -12,7 +12,7 @@ This guide covers the advanced features, how to use them, and how they function 
 ---
 
 ## 🤖 The Tactical AI Engine (Gemma 4)
-StrikePoint AI does not use the cloud to process your questions. We run Google's **Gemma 4 E2B** model directly on your device via the `flutter_gemma` LiteRT engine.
+StrikePoint AI does not use the cloud to process your questions. We run an advanced artificial intelligence directly on your device, ensuring total privacy and offline capability.
 
 Before the AI answers you, our Data Engine pulls from 28 unique environmental and tactical sources.
 
@@ -20,12 +20,12 @@ Before the AI answers you, our Data Engine pulls from 28 unique environmental an
 - **28-Source Context Aggregation Pipeline:** The engine aggregates data from live river flow rates, water quality sensors, ocean tides, marine weather, and satellite water clarity. It employs dynamic heuristics like air-temperature regressions and 72-hour rain turbidity estimations when direct sensors are offline.
 - **Per-Water-Body Species Engine:** The AI cross-references your exact water body using a 3-tier lookup: an organic cache of local species records, a bundled offline core database (major reservoirs, tournament lakes, state top-25 waters), and live regional fish occurrence data. This includes live monitoring of reservoir pool elevations.
 - **Federal Hydrology Classifier:** The AI reads raw public-domain geometry from national hydrography networks to classify your water type.
-- **Hardware-Adaptive Inference:** StrikePoint dynamically tiers token budgets (2048 vs 3072) and utilizes a persistent session KV cache to prevent `liblitertlm_jni` crashes on older hardware. A "noun-drift" cache strictly prevents repetitive LLM speech patterns.
+- **Hardware-Adaptive Intelligence:** StrikePoint automatically scales its AI engine to fit your phone's memory, ensuring stable, crash-free performance even on older devices. A built-in conversation engine prevents repetitive or robotic responses.
 
 ---
 
-## ⚙️ Advanced AI Orchestration
-StrikePoint is far more than a simple LLM wrapper; it utilizes a complex multi-agent orchestration layer to guarantee speed and accuracy.
+## ⚙️ Advanced AI Intelligence
+StrikePoint is far more than a basic chatbot. It uses a network of specialized background systems to guarantee speed and accuracy.
 
 - **Smart Query Routing & Precision Math:** Instead of guessing, the system instantly categorizes your questions and uses precise math to calculate distances and solunar times, preventing mistakes.
 - **Autonomous Agents:** The AI is equipped with 12 read-only tools. It can autonomously search the hotspot database, query your catch history, pull species biology, and fetch on-demand weather, tides, and river flows without asking for permission.
