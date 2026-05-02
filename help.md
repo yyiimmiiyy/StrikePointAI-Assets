@@ -68,8 +68,8 @@ StrikePoint AI allows you to cache massive blocks of map data directly to your d
 
 ---
 
-## 📸 On-Device Vision (775-Class Fish ID)
-Our custom Vision AI runs entirely on your phone's processor. Using a highly optimized **BEiTv2 TFLite** model, it can identify **775 unique species** of fish in milliseconds.
+## 📸 On-Device Vision (100+ Class Fish ID)
+Our custom Vision AI runs entirely on your phone's processor. Using a highly optimized **BEiTv2 TFLite** model, it can identify **100+ unique species** of fish in milliseconds.
 
 **How to log a catch:**
 1. Tap the **Camera** button.
