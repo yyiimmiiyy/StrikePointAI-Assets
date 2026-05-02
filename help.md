@@ -100,7 +100,7 @@ Your waypoints and catches are strictly yours. StrikePoint provides true offline
 We hate subscriptions. You own your tools.
 
 - **Free Tier:** Log unlimited catches, save unlimited waypoints, and use the offline map. You get 30 free AI queries during your first week, and 7 free queries every week after that.
-- **Pro Unlock ($19.99):** A one-time purchase unlocks unlimited Gemma 4 AI interactions, unlimited tackle box storage, and full access to the Tactical Heatmap.
+- **Pro Unlock ($19.99):** A one-time purchase unlocks unlimited Gemma 4 E2B AI interactions, unlimited tackle box storage, full access to the Tactical Heatmap, and the Extended 7-Day Marine Forecast.
 
 **Offline Purchase Verification:** StrikePoint securely verifies your App Store purchase directly on your device. You will never get locked out of your premium tools just because you lost cell service.
 
