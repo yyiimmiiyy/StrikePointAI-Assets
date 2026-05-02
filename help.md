@@ -5,49 +5,84 @@ title: Help & Support
 
 # StrikePoint AI User Guide
 
-Welcome to StrikePoint AI! This guide covers the essential features of the app and how to get the most out of your offline tactical fishing assistant.
+Welcome to StrikePoint AI. This is a tactical, offline-first fishing intelligence platform powered by an on-device Gemma 4 AI engine and a massive 28-source environmental data pipeline. 
 
-## 🎣 Smart Catch Logging
+This guide covers the core features, how to use them, and how they function when you leave cell service behind.
 
-StrikePoint AI uses advanced telemetry to augment your catch records. When you log a catch, the app automatically records:
-- **Barometric Pressure Trends**: Evaluates if the pressure is rising or falling (pre/post-frontal).
-- **Water Conditions**: Pulls nearby USGS streamflow (CFS) and water temperature.
-- **Solunar Phase**: Calculates the exact lunar phase and feeding window at the time of the catch.
+---
 
-**To log a catch:**
-1. Tap the **Camera** icon in the bottom navigation bar.
-2. Snap a photo of your catch.
-3. StrikePoint AI's vision model will automatically identify the species and approximate size.
-4. Add your lure/tackle details and tap **Save**.
+## 🗺️ Offline Maps & Bathymetry
 
-## 🗺️ Trip Mode (Offline Maps)
+StrikePoint AI allows you to cache massive blocks of map data directly to your device so you can navigate and locate structure without cell service.
 
-Trip mode is designed for remote angling where cell service is unreliable or nonexistent.
+**How to download maps:**
+1. Tap the **Download Icon** on the Map Screen.
+2. The app will present a bounding box. Pan and zoom to select your expedition area.
+3. If you have the **Bathymetry Layer** enabled (the topography icon), the app will *natively* download official NOAA (US) or CHS NONNA (Canada) WMS depth contour tiles alongside the standard map tiles.
+4. Tap **Download**. Ensure you are on Wi-Fi (unless you have explicitly enabled Cellular Downloads in Trip Mode settings).
 
-**How it works:**
-- Before leaving Wi-Fi or cellular range, tap **Trip Mode** on the map screen.
-- The app will prompt you to download the surrounding map tiles (bathymetry, topography, and public waypoints).
-- Once downloaded, your maps and AI assistant will function 100% offline for 24 hours.
+Your maps, including deep-water bathymetry, are now available 100% offline.
 
-> **Note:** Trip Mode also acts as a "Quiet Mode", pausing non-essential push notifications while you are on the water.
+---
 
-## 🤖 The Tactical AI Assistant
+## 🏕️ Trip Mode
 
-The core of StrikePoint AI is the on-device Llama 3.2 engine. It is completely private and runs locally on your phone.
+Trip Mode is a specialized lifecycle state designed for active expeditions. **It is separate from downloading maps.**
 
-**Tips for great responses:**
-- **Be Specific:** Instead of "What lure should I use?", ask "I'm fishing a rocky point in 12ft of water. The pressure is falling and it's overcast. What lure is best for Smallmouth?"
-- **Ask about your data:** "What was the water temperature the last time I caught a Bass here?"
-- **Battery Saver:** If you are running low on battery, enable **Low Power Mode** in settings to slightly reduce the AI's background processing.
+**What Trip Mode does:**
+- **Quiet Mode Integration:** By default, Trip Mode silences non-essential push notifications so your phone isn't buzzing while you're fighting a fish. 
+- **Geographic Re-alignment:** If you travel long distances while the app is in the background, returning to the app in Trip Mode will dynamically force the Solunar Math engine to recalculate your major and minor feeding windows based on your new coordinates.
+- **Cellular Overrides:** Allows you to configure whether the app is permitted to use cellular data for map downloads or API calls while active.
 
-## 💳 Free Tier & Pro Unlock
+*Toggle Trip Mode using the tent icon on the map screen.*
 
-We believe in keeping the core logging experience completely free forever.
+---
+
+## 📸 On-Device Fish ID & Catch Logging
+
+Our custom Vision AI runs entirely on your phone's processor. It can identify over 100+ species of fish in milliseconds.
+
+**How to log a catch:**
+1. Tap the **Camera** button in the main navigation.
+2. Take a photo of your catch. The AI will immediately analyze the frame.
+3. If the AI is highly confident (≥ 60% cosine similarity), it will automatically categorize the species and open the catch review sheet.
+4. The Catch Logger instantly snapshots the current weather, barometric pressure, and solunar phase, saving the full environmental context to your local SQLCipher database.
+
+---
+
+## 🤖 The Tactical AI Engine (Gemma 4)
+
+StrikePoint AI does not use the cloud to process your questions. We run Google's **Gemma 4 E2B** model directly on your device.
+
+Before the AI answers you, our Data Engine pulls from 28 unique sources—including USGS river flows, NOAA tides, Open-Meteo marine conditions, and your own catch history. 
+
+**Tips for the AI:**
+- **Zero-Shot Routing:** The AI knows what you are asking. If you ask about Knot Tying, it will route your question to the Tactical knowledge base and ignore the local tide data.
+- **Ask about your history:** Try asking, *"What lure was I using the last time I caught a Bass in these weather conditions?"* The AI will read your digital Tackle Box and Catch Log.
+- **Tactical Heatmaps:** The AI powers the map Heatmap overlay. It calculates the dot-product similarity between the current live weather and the exact weather conditions of your past catches, literally making the map glow where you should cast.
+
+---
+
+## 🎣 Digital Tackle Box & Matrix
+
+The Tackle Box is not just a list of your gear—it is an active intelligence matrix.
+
+1. Add your lures, specifying their weight, color, and profile.
+2. When you ask the AI for advice, it runs an **Optimal Tackle Matrix**.
+3. It analyzes the live cloud cover (to suggest lure color theory), wind speed (to suggest lure profile), and water depth, and cross-references those physics against your actual inventory. 
+
+---
+
+## 💳 Pricing & Subscriptions
+
+We hate subscriptions. You own your tools.
 
 - **Free Tier:** Log unlimited catches, save unlimited waypoints, and use the offline map. You get 30 free AI queries during your first week, and 7 free queries every week after that.
-- **Pro Unlock:** A one-time purchase of $19.99 unlocks **unlimited AI interactions** and unlimited tackle box storage forever. There are **no monthly subscriptions**.
+- **Pro Unlock:** A one-time purchase of **$19.99** unlocks unlimited Gemma 4 AI interactions, unlimited tackle box storage, and full access to the Tactical Heatmap.
 
-## 📞 Contact Support
+---
 
-If you encounter a bug or have a question not covered here, please reach out to us at:
+## 📞 Support
+
+If you encounter a bug or need assistance:
 **support@goodhopetech.com**

@@ -41,33 +41,33 @@
         .ambient-glow-1, .ambient-glow-2, .ambient-glow-3 {
             position: fixed;
             border-radius: 50%;
-            filter: blur(120px);
+            filter: blur(140px);
             z-index: -1;
-            opacity: 0.4;
-            animation: drift 20s infinite alternate ease-in-out;
+            opacity: 0.35;
+            animation: drift 25s infinite alternate ease-in-out;
             pointer-events: none;
         }
         .ambient-glow-1 {
             top: -10%; left: -10%;
-            width: 60vw; height: 60vw;
-            background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%);
+            width: 70vw; height: 70vw;
+            background: radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 60%);
         }
         .ambient-glow-2 {
             bottom: -20%; right: -10%;
-            width: 50vw; height: 50vw;
-            background: radial-gradient(circle, rgba(139,92,246,0.2) 0%, transparent 70%);
-            animation-delay: -5s;
+            width: 60vw; height: 60vw;
+            background: radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 60%);
+            animation-delay: -7s;
         }
         .ambient-glow-3 {
-            top: 40%; left: 40%;
-            width: 40vw; height: 40vw;
-            background: radial-gradient(circle, rgba(34,211,238,0.15) 0%, transparent 70%);
-            animation-delay: -10s;
+            top: 30%; left: 30%;
+            width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(34,211,238,0.2) 0%, transparent 60%);
+            animation-delay: -14s;
         }
 
         @keyframes drift {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(10%, 10%) scale(1.1); }
+            100% { transform: translate(15%, 15%) scale(1.15); }
         }
 
         /* Nav */
@@ -78,9 +78,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(3, 7, 18, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(3, 7, 18, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border-bottom: 1px solid var(--border-glass);
             z-index: 1000;
         }
@@ -116,19 +116,26 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 8rem 5% 4rem;
+            padding: 9rem 5% 4rem;
             text-align: center;
             position: relative;
         }
 
         .hero h1 {
             font-family: var(--font-heading);
-            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
             font-weight: 900;
             line-height: 1.05;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.04em;
             margin-bottom: 1.5rem;
-            max-width: 900px;
+            max-width: 1000px;
+            animation: text-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes text-reveal {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .text-gradient {
@@ -138,11 +145,14 @@
         }
 
         .hero p {
-            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            font-size: clamp(1.15rem, 2vw, 1.4rem);
             color: var(--text-muted);
-            max-width: 700px;
-            margin-bottom: 3rem;
+            max-width: 750px;
+            margin-bottom: 3.5rem;
             font-weight: 400;
+            animation: text-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+            opacity: 0;
+            transform: translateY(20px);
         }
 
         .cta-container {
@@ -150,7 +160,10 @@
             gap: 1.5rem;
             flex-wrap: wrap;
             justify-content: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
+            animation: text-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
+            opacity: 0;
+            transform: translateY(20px);
         }
 
         .btn {
@@ -170,13 +183,13 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
             color: white;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 25px rgba(59, 130, 246, 0.5);
+            border: 1px solid rgba(255,255,255,0.15);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 35px rgba(139, 92, 246, 0.7);
         }
 
         .btn-secondary {
@@ -189,69 +202,73 @@
         .btn-secondary:hover {
             background: var(--bg-surface-hover);
             transform: translateY(-3px);
+            border-color: rgba(255,255,255,0.2);
         }
 
         .hero-img-wrapper {
             position: relative;
             width: 100%;
-            max-width: 900px;
-            border-radius: 24px;
+            max-width: 950px;
+            border-radius: 28px;
             padding: 1px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
-            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8);
-            transform: perspective(1000px) rotateX(2deg);
-            transition: transform 0.5s ease;
+            background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%);
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.9);
+            transform: perspective(1200px) rotateX(4deg);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: text-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
+            opacity: 0;
+            transform-origin: bottom;
         }
 
         .hero-img-wrapper:hover {
-            transform: perspective(1000px) rotateX(0deg);
+            transform: perspective(1200px) rotateX(0deg) scale(1.02);
         }
 
         .hero-img {
             display: block;
             width: 100%;
-            border-radius: 23px;
+            border-radius: 27px;
             background: var(--bg-base);
         }
 
         /* Section Layouts */
         .section {
-            padding: 6rem 5%;
-            max-width: 1300px;
+            padding: 7rem 5%;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
 
         .section-header h2 {
             font-family: var(--font-heading);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
+            font-size: clamp(2.8rem, 5vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
         }
 
         .section-header p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--text-muted);
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
         }
 
         /* Grid Framework */
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
         }
 
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 4rem;
             align-items: center;
         }
 
@@ -259,11 +276,11 @@
         .card {
             background: var(--bg-surface);
             border: 1px solid var(--border-glass);
-            border-radius: 24px;
-            padding: 2.5rem;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            transition: all 0.4s ease;
+            border-radius: 28px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
         }
@@ -272,22 +289,22 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             background: var(--bg-surface-hover);
-            border-color: rgba(56, 189, 248, 0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
         .card:hover::before { opacity: 1; }
 
         .card-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1.5rem;
             display: inline-block;
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
@@ -297,84 +314,196 @@
 
         .card h3 {
             font-family: var(--font-heading);
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.7rem;
+            font-weight: 800;
             margin-bottom: 1rem;
             color: white;
+            letter-spacing: -0.01em;
         }
 
-        .card p { color: var(--text-muted); font-size: 1.05rem; }
+        .card p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; }
 
         /* Badge/Pill styling */
         .pill {
             display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: rgba(59, 130, 246, 0.1);
+            padding: 0.35rem 1rem;
+            background: rgba(59, 130, 246, 0.15);
             color: var(--accent-cyan);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.3);
             border-radius: 99px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* Infinite Marquee */
+        .marquee-container {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            overflow: hidden;
+            position: relative;
+            padding: 2rem 0;
+            background: rgba(0,0,0,0.4);
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
+            display: flex;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 1.5rem;
+            white-space: nowrap;
+            animation: marquee 45s linear infinite;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-item {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .marquee-item::before {
+            content: '●';
+            color: var(--accent-cyan);
+            font-size: 0.8rem;
+        }
+
+        .marquee-item:hover {
+            background: rgba(56, 189, 248, 0.1);
+            color: white;
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: scale(1.05);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Shift by exactly half to loop */
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: linear-gradient(180deg, transparent 0%, rgba(59,130,246,0.05) 100%);
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            border-radius: 32px;
+            padding: 3.5rem 3rem;
+            position: relative;
+            transition: transform 0.4s;
+        }
+
+        .pricing-card:hover { transform: translateY(-5px); }
+
+        .pricing-pro {
+            background: linear-gradient(180deg, rgba(31, 41, 55, 0.9) 0%, rgba(17, 24, 39, 0.9) 100%);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .pricing-pro::before {
+            content: 'Recommended';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #000;
+            padding: 0.25rem 1.5rem;
+            border-radius: 99px;
+            font-weight: 800;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
-        /* Sources Grid */
-        .sources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
+        .price-val {
+            font-family: var(--font-heading);
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: white;
+            line-height: 1;
+            margin: 1.5rem 0;
         }
         
-        .source-tag {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border-glass);
-            padding: 1rem;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: all 0.2s;
+        .price-val span { font-size: 1.25rem; color: var(--text-muted); font-weight: 500; }
+
+        .pricing-list {
+            list-style: none;
+            margin-top: 2rem;
+            margin-bottom: 2.5rem;
         }
-        .source-tag:hover {
-            background: rgba(255,255,255,0.08);
-            color: white;
-            border-color: rgba(255,255,255,0.2);
+
+        .pricing-list li {
+            padding: 0.75rem 0;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
+        
+        .pricing-list li:last-child { border-bottom: none; }
+        .pricing-list li::before { content: '✓'; color: var(--accent-cyan); font-weight: bold; }
 
         /* Footer */
         footer {
             border-top: 1px solid var(--border-glass);
-            padding: 4rem 5%;
+            padding: 5rem 5% 3rem;
             text-align: center;
             background: #000;
-            margin-top: 4rem;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
+            gap: 3rem;
+            margin: 2.5rem 0;
         }
 
         .footer-links a {
             color: var(--text-muted);
             text-decoration: none;
+            font-weight: 500;
             transition: color 0.2s;
         }
         .footer-links a:hover { color: white; }
         
-        .copyright { color: rgba(255,255,255,0.3); font-size: 0.9rem; }
+        .copyright { color: rgba(255,255,255,0.3); font-size: 0.95rem; }
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .hero { padding-top: 7rem; }
+            .hero { padding-top: 8rem; }
             .grid-2 { grid-template-columns: 1fr; text-align: center; }
-            .section { padding: 4rem 5%; }
+            .section { padding: 5rem 5%; }
+            .pricing-card { padding: 2.5rem 1.5rem; }
         }
     </style>
 </head>
@@ -390,7 +519,8 @@
         </a>
         <nav class="nav-links">
             <a href="#intelligence">AI Engine</a>
-            <a href="#telemetry">28-Source Telemetry</a>
+            <a href="#telemetry">Context Engine</a>
+            <a href="#pricing">Pricing</a>
             <a href="help.html">Help Center</a>
         </nav>
     </header>
@@ -410,6 +540,43 @@
                 <img src="assets/splash_hero.webp" alt="StrikePoint AI Interface" class="hero-img">
             </div>
         </section>
+
+        <!-- Marquee separator -->
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <!-- Double the items so the infinite scroll loops seamlessly -->
+                <div class="marquee-item">USGS River Flow</div>
+                <div class="marquee-item">NOAA Tides</div>
+                <div class="marquee-item">ECCC WaterOffice</div>
+                <div class="marquee-item">CHS Tides</div>
+                <div class="marquee-item">USACE Pools</div>
+                <div class="marquee-item">EPA Water Quality</div>
+                <div class="marquee-item">MODIS Water Clarity</div>
+                <div class="marquee-item">Open-Meteo Marine</div>
+                <div class="marquee-item">GBIF Biodiversity</div>
+                <div class="marquee-item">Offline Bathymetry</div>
+                <div class="marquee-item">Tactical Heatmap</div>
+                <div class="marquee-item">Offline Solunar Math</div>
+                <div class="marquee-item">Water Body Classifier</div>
+                <div class="marquee-item">1,470+ Fishery DB</div>
+                
+                <!-- DUPLICATE SET -->
+                <div class="marquee-item">USGS River Flow</div>
+                <div class="marquee-item">NOAA Tides</div>
+                <div class="marquee-item">ECCC WaterOffice</div>
+                <div class="marquee-item">CHS Tides</div>
+                <div class="marquee-item">USACE Pools</div>
+                <div class="marquee-item">EPA Water Quality</div>
+                <div class="marquee-item">MODIS Water Clarity</div>
+                <div class="marquee-item">Open-Meteo Marine</div>
+                <div class="marquee-item">GBIF Biodiversity</div>
+                <div class="marquee-item">Offline Bathymetry</div>
+                <div class="marquee-item">Tactical Heatmap</div>
+                <div class="marquee-item">Offline Solunar Math</div>
+                <div class="marquee-item">Water Body Classifier</div>
+                <div class="marquee-item">1,470+ Fishery DB</div>
+            </div>
+        </div>
 
         <section id="intelligence" class="section">
             <div class="section-header">
@@ -441,79 +608,72 @@
             </div>
         </section>
 
-        <section id="telemetry" class="section" style="background: rgba(0,0,0,0.3); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
-            <div class="grid-2">
-                <div>
-                    <span class="pill">The Context Engine</span>
-                    <h2 style="font-family: var(--font-heading); font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem;">28 Unique Data Sources.</h2>
-                    <p style="color: var(--text-muted); font-size: 1.15rem; margin-bottom: 2rem;">Our Data Engine aggregates 14 external government APIs and 14 on-device telemetry databases to give the AI total situational awareness before it ever answers your question.</p>
-                    
-                    <ul style="color: var(--text-muted); margin-left: 1.5rem; font-size: 1.05rem; line-height: 1.8;">
-                        <li><strong>Trip Mode:</strong> Offline caching of NOAA and CHS NONNA Bathymetry WMS tiles.</li>
-                        <li><strong>Zero-Shot Routing:</strong> Semantic classification prevents AI hallucination.</li>
-                        <li><strong>Offline Solunar:</strong> Major/Minor feeding windows calculated by astronomical algorithms.</li>
-                    </ul>
-                </div>
-
-                <div class="sources-grid">
-                    <!-- 14 External APIs -->
-                    <div class="source-tag">USGS River Flow</div>
-                    <div class="source-tag">ECCC WaterOffice</div>
-                    <div class="source-tag">NOAA Tides</div>
-                    <div class="source-tag">CHS Tides</div>
-                    <div class="source-tag">USACE Reservoir Pools</div>
-                    <div class="source-tag">MODIS Water Clarity</div>
-                    <div class="source-tag">EPA Water Quality</div>
-                    <div class="source-tag">Open-Meteo Weather</div>
-                    <div class="source-tag">Open-Meteo Marine</div>
-                    <div class="source-tag">Open-Meteo AQI</div>
-                    <div class="source-tag">GBIF Biodiversity</div>
-                    <div class="source-tag">OSM Water Bodies</div>
-                    <div class="source-tag">Nominatim Geocoding</div>
-                    <div class="source-tag">NOAA/CHS Bathymetry</div>
-                    
-                    <!-- 14 On-Device Engines -->
-                    <div class="source-tag">1,470+ Fishery DB</div>
-                    <div class="source-tag">Tactical Intelligence</div>
-                    <div class="source-tag">Offline Solunar Math</div>
-                    <div class="source-tag">Solar Golden Hours</div>
-                    <div class="source-tag">Digital Tackle Box</div>
-                    <div class="source-tag">Optimal Tackle Matrix</div>
-                    <div class="source-tag">Public Hotspot Atlas</div>
-                    <div class="source-tag">Private Waypoints</div>
-                    <div class="source-tag">Catch History Log</div>
-                    <div class="source-tag">Chat Conversation Memory</div>
-                    <div class="source-tag">Hardware GPS Telemetry</div>
-                    <div class="source-tag">Water Body Classifier</div>
-                    <div class="source-tag">Water Body Species Index</div>
-                    <div class="source-tag">Intent Routing Engine</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
+        <section id="features" class="section">
             <div class="section-header">
                 <h2>Advanced Tooling</h2>
+                <p>Built exclusively for anglers who operate in zero-service environments.</p>
             </div>
             
             <div class="grid-2">
                 <div class="card" style="text-align: center;">
-                    <div class="card-icon" style="font-size: 3.5rem;">📸</div>
+                    <div class="card-icon" style="font-size: 4rem;">📸</div>
                     <h3>On-Device Fish ID</h3>
                     <p>Identify over 100+ species of fish instantly using your camera. Our custom TFLite Vision classifier processes frames completely offline. No waiting for a cloud server while holding a fish.</p>
                 </div>
                 
                 <div class="card" style="text-align: center;">
-                    <div class="card-icon" style="font-size: 3.5rem;">💳</div>
-                    <h3>No Subscriptions</h3>
-                    <p>Enjoy a generous Free Tier containing the full offline atlas and catch logger. Want unlimited AI and tackle storage? It's a <strong>one-time $19.99 Pro unlock</strong>. We hate subscriptions as much as you do.</p>
+                    <div class="card-icon" style="font-size: 4rem;">🗺️</div>
+                    <h3>Trip Mode</h3>
+                    <p>Silences non-essential alerts but tracks geographic drift to dynamically recalculate feeding windows.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="section pricing-section">
+            <div class="section-header">
+                <h2>Fair Pricing. Zero Subscriptions.</h2>
+                <p>We hate monthly fees as much as you do. Own your tools.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free Tier</h3>
+                    <div class="price-val">$0 <span>/ forever</span></div>
+                    <p style="color: var(--text-muted);">Perfect for weekend anglers.</p>
+                    
+                    <ul class="pricing-list">
+                        <li>Offline Map Atlas & Navigation</li>
+                        <li>Catch History Logger</li>
+                        <li>Major & Minor Solunar Math</li>
+                        <li>30 AI Queries (Week 1)</li>
+                        <li>7 AI Queries (Per Week After)</li>
+                    </ul>
+                    
+                    <a href="#ios-store-link" class="btn btn-secondary" style="width: 100%;">Download Free</a>
+                </div>
+
+                <div class="pricing-card pricing-pro">
+                    <h3 style="color: white;">Pro Unlock</h3>
+                    <div class="price-val">$19.99 <span>/ one-time</span></div>
+                    <p style="color: var(--accent-cyan);">The ultimate tactical advantage.</p>
+                    
+                    <ul class="pricing-list">
+                        <li><strong>Everything in Free</strong></li>
+                        <li>Unlimited Gemma 4 AI Queries</li>
+                        <li>Unlimited Digital Tackle Box</li>
+                        <li>AI Tackle Selection Matrix</li>
+                        <li>Tactical Heatmap Generation</li>
+                        <li>Priority WMS Tile Downloading</li>
+                    </ul>
+                    
+                    <a href="#ios-store-link" class="btn btn-primary" style="width: 100%;">Unlock in App</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <h2>StrikePoint AI</h2>
+        <h2 style="font-family: var(--font-heading); font-size: 2rem;">StrikePoint AI</h2>
         <p style="color: var(--text-muted); margin-top: 0.5rem;">By Goodhope Technologies LLC</p>
         
         <div class="footer-links">
