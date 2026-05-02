@@ -26,7 +26,7 @@ external servers. This includes:
 - Audio recordings from voice input
 
 All of this data lives in an AES-256 encrypted SQLite database on your device. The
-AI inference (Llama 3.2) runs entirely on your device's CPU/RAM — your queries are never
+AI inference (Gemma 4) runs entirely on your device's CPU/RAM — your queries are never
 sent to a cloud service for processing.
 
 ---
