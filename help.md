@@ -20,8 +20,19 @@ Before the AI answers you, our Data Engine pulls from 28 unique environmental an
 - **28-Source Context Aggregation Pipeline:** The engine aggregates data from USGS river flow rates, ECCC WaterOffice, EPA water quality, CHS/NOAA Tides, Open-Meteo Marine, and MODIS satellites. It employs dynamic heuristics like air-temperature regressions and 72-hour rain turbidity estimations when direct sensors are offline.
 - **Per-Water-Body Species Engine:** The AI cross-references your exact water body using a 3-tier lookup: an organic cache (live GBIF data), a bundled offline core DB (USACE/USBR reservoirs, tournament lakes, state top-25 waters), and live GBIF fallback. This includes live monitoring of USACE pool elevations.
 - **USGS NHD & NRCan NHN Hydrology Classifier:** The AI reads raw public-domain ArcGIS geometry from federal and provincial hydrography networks to classify your water type.
-- **8-Layer Guard Chain:** Absolute safety. A relentless chain of stream validators ensures the AI refuses to give illegal or unregulated creel limit advice.
 - **Hardware-Adaptive Inference:** StrikePoint dynamically tiers token budgets (2048 vs 3072) and utilizes a persistent session KV cache to prevent `liblitertlm_jni` crashes on older hardware. A "noun-drift" cache strictly prevents repetitive LLM speech patterns.
+
+---
+
+## ⚙️ Advanced AI Orchestration
+StrikePoint is far more than a simple LLM wrapper; it utilizes a complex multi-agent orchestration layer to guarantee speed and accuracy.
+
+- **Zero-Shot Semantic Intent Router & Hybrid Dispatchers:** Instead of feeding every query blindly to the LLM, the system uses Matryoshka embeddings to classify the query into 6 core intents. Geographic distance queries bypass the LLM entirely and use deterministic math via Hybrid Dispatchers.
+- **Autonomous Tool Calling Engine:** The AI has the autonomy to execute JSON tool calls (`searchPublicHotspots`, `searchCatchHistory`, `searchTacticalIntel`, `getSpeciesIntel`, `refreshConditions`) to pull precisely the data it needs.
+- **Pre-LLM Short-Circuit Registry:** The pipeline intercepts prompt injection attempts and trivial small-talk *before* they hit the heavy RAG pipeline, instantly returning lightweight responses to save battery.
+- **8-Layer Guard Chain:** Absolute safety. A relentless chain of stream validators ensures the AI refuses to give illegal or unregulated creel limit advice.
+- **State-Machine Insight Deduplication:** The UI filters actionable chips (like `📡 Offline Mode` or weather shifts) against the previous message state so you are never spammed with repetitive telemetry.
+- **On-Device Evaluation Harness:** The app ships with a built-in debugging harness to run offline regression testing (measuring Time-To-First-Token, full inference ms, and RAG attribution) natively on the device hardware.
 
 ---
 
