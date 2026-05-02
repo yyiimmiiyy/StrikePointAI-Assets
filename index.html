@@ -3,327 +3,505 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StrikePoint AI - Offline Fishing Assistant</title>
+    <meta name="description" content="StrikePoint AI - Tactical, 100% offline fishing intelligence powered by Gemma 4 E2B and a 28-source telemetry engine.">
+    <title>StrikePoint AI | Offline Fishing Intelligence</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-dark: #050810;
-            --surface-color: rgba(18, 24, 38, 0.6);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-glow: #38bdf8;
-            --accent-glow-dark: #0284c7;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --bg-base: #030712;
+            --bg-surface: rgba(17, 24, 39, 0.65);
+            --bg-surface-hover: rgba(31, 41, 55, 0.85);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-cyan: #22d3ee;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
         }
-        
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
+            font-family: var(--font-body);
+            background-color: var(--bg-base);
+            color: var(--text-main);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
 
-        /* Abstract Background Gradients */
-        .bg-glow {
+        /* Dynamic Backgrounds */
+        .ambient-glow-1, .ambient-glow-2, .ambient-glow-3 {
             position: fixed;
-            top: -20%;
-            left: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            filter: blur(120px);
             z-index: -1;
-            filter: blur(80px);
-            animation: pulse 8s infinite alternate ease-in-out;
+            opacity: 0.4;
+            animation: drift 20s infinite alternate ease-in-out;
+            pointer-events: none;
         }
-        
-        .bg-glow-2 {
-            position: fixed;
-            bottom: -20%;
-            right: -10%;
-            width: 40vw;
-            height: 40vw;
-            background: radial-gradient(circle, rgba(2, 132, 199, 0.15) 0%, rgba(0,0,0,0) 70%);
-            z-index: -1;
-            filter: blur(80px);
-            animation: pulse 12s infinite alternate-reverse ease-in-out;
+        .ambient-glow-1 {
+            top: -10%; left: -10%;
+            width: 60vw; height: 60vw;
+            background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%);
+        }
+        .ambient-glow-2 {
+            bottom: -20%; right: -10%;
+            width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(139,92,246,0.2) 0%, transparent 70%);
+            animation-delay: -5s;
+        }
+        .ambient-glow-3 {
+            top: 40%; left: 40%;
+            width: 40vw; height: 40vw;
+            background: radial-gradient(circle, rgba(34,211,238,0.15) 0%, transparent 70%);
+            animation-delay: -10s;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1) translate(0, 0); opacity: 0.8; }
-            100% { transform: scale(1.1) translate(5%, 5%); opacity: 1; }
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10%, 10%) scale(1.1); }
         }
 
-        /* Navbar */
-        .nav-header {
-            background-color: rgba(5, 8, 16, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-color);
+        /* Nav */
+        .navbar {
             position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            padding: 1rem 2rem;
+            top: 0; width: 100%;
+            padding: 1rem 5%;
             display: flex;
+            justify-content: space-between;
             align-items: center;
+            background: rgba(3, 7, 18, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            z-index: 1000;
         }
-        
-        .nav-logo {
+
+        .nav-brand {
             display: flex;
             align-items: center;
+            gap: 12px;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: white;
             text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 700;
-            font-size: 1.25rem;
             letter-spacing: -0.02em;
         }
-        
-        .nav-logo img {
-            height: 32px;
-            margin-right: 12px;
-            border-radius: 6px;
-        }
-        
-        .nav-links {
-            margin-left: auto;
-            display: flex;
-            gap: 2rem;
-        }
-        
+
+        .nav-brand img { height: 36px; border-radius: 8px; }
+
+        .nav-links { display: flex; gap: 2rem; }
         .nav-links a {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 500;
-            transition: color 0.2s ease;
+            transition: color 0.3s;
         }
-        
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
+        .nav-links a:hover { color: white; }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 8rem 2rem 4rem;
+            padding: 8rem 5% 4rem;
             text-align: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            z-index: 10;
+            position: relative;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 5vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
             letter-spacing: -0.03em;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            max-width: 900px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 20%, var(--accent-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--text-muted);
+            max-width: 700px;
             margin-bottom: 3rem;
-            max-width: 600px;
-            margin-inline: auto;
+            font-weight: 400;
         }
 
-        .cta-group {
+        .cta-container {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
+            gap: 1.5rem;
             flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 4rem;
         }
 
         .btn {
-            padding: 0.875rem 2rem;
-            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            border-radius: 99px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.05rem;
             text-decoration: none;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-glow) 0%, var(--accent-glow-dark) 100%);
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
             color: white;
-            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(8px);
+            background: var(--bg-surface);
+            color: white;
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
+            background: var(--bg-surface-hover);
+            transform: translateY(-3px);
         }
 
-        /* Features Grid */
-        .features {
-            padding: 4rem 2rem 8rem;
-            max-width: 1200px;
+        .hero-img-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8);
+            transform: perspective(1000px) rotateX(2deg);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-img-wrapper:hover {
+            transform: perspective(1000px) rotateX(0deg);
+        }
+
+        .hero-img {
+            display: block;
+            width: 100%;
+            border-radius: 23px;
+            background: var(--bg-base);
+        }
+
+        /* Section Layouts */
+        .section {
+            padding: 6rem 5%;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
-        .features-grid {
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Grid Framework */
+        .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
-        .feature-card {
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        /* Feature Cards */
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
             border-radius: 24px;
             padding: 2.5rem;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .feature-card:hover {
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .card:hover {
             transform: translateY(-5px);
+            background: var(--bg-surface-hover);
             border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        .feature-icon {
-            font-size: 2rem;
+        .card:hover::before { opacity: 1; }
+
+        .card-icon {
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .feature-card h3 {
+        .card h3 {
+            font-family: var(--font-heading);
             font-size: 1.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            color: #fff;
+            color: white;
         }
 
-        .feature-card p {
-            color: var(--text-secondary);
+        .card p { color: var(--text-muted); font-size: 1.05rem; }
+
+        /* Badge/Pill styling */
+        .pill {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Sources Grid */
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .source-tag {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-glass);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+        .source-tag:hover {
+            background: rgba(255,255,255,0.08);
+            color: white;
+            border-color: rgba(255,255,255,0.2);
         }
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--border-color);
-            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-glass);
+            padding: 4rem 5%;
             text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            margin: 0 0.5rem;
-        }
-        
-        footer a:hover {
-            color: var(--text-primary);
-        }
-
-        /* Hero Image Container */
-        .hero-image-wrapper {
+            background: #000;
             margin-top: 4rem;
-            position: relative;
-            max-width: 800px;
-            margin-inline: auto;
-            border-radius: 24px;
-            padding: 1px; /* gradient border trick */
-            background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        .hero-image {
-            display: block;
-            width: 100%;
-            height: auto;
-            border-radius: 23px;
-            background: var(--bg-dark);
-            opacity: 0.9;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: white; }
+        
+        .copyright { color: rgba(255,255,255,0.3); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding-top: 7rem; }
+            .grid-2 { grid-template-columns: 1fr; text-align: center; }
+            .section { padding: 4rem 5%; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-glow"></div>
-    <div class="bg-glow-2"></div>
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+    <div class="ambient-glow-3"></div>
 
-    <header class="nav-header">
-        <a href="#" class="nav-logo">
-            <img src="assets/app_icon.webp" alt="StrikePoint AI Logo">
+    <header class="navbar">
+        <a href="#" class="nav-brand">
+            <img src="assets/app_icon.webp" alt="StrikePoint AI Icon">
             StrikePoint AI
         </a>
         <nav class="nav-links">
-            <a href="help.html">Help</a>
-            <a href="privacy.html">Privacy</a>
-            <a href="terms.html">Terms</a>
+            <a href="#intelligence">AI Engine</a>
+            <a href="#telemetry">28-Source Telemetry</a>
+            <a href="help.html">Help Center</a>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-            <div class="hero-content">
-                <h1>Tactical offline AI for serious anglers.</h1>
-                <p>Log your catches, analyze live environmental telemetry, and interact with an intelligent on-device assistant that works entirely without cell service.</p>
-                <div class="cta-group">
-                    <a href="#ios-store-link" class="btn btn-primary">Download on App Store</a>
-                    <a href="#android-store-link" class="btn btn-primary">Get it on Google Play</a>
-                    <a href="help.html" class="btn btn-secondary">Read the Guide</a>
+            <div class="pill">Hardware-Adaptive Intelligence</div>
+            <h1>The ultimate <span class="text-gradient">offline AI</span> for serious anglers.</h1>
+            <p>Powered by an on-device Gemma 4 engine and a 28-source environmental RAG pipeline. Deep telemetry, tactical heatmaps, and absolute privacy—zero cell service required.</p>
+            
+            <div class="cta-container">
+                <a href="#ios-store-link" class="btn btn-primary">Download on App Store</a>
+                <a href="#android-store-link" class="btn btn-primary">Get it on Google Play</a>
+            </div>
+
+            <div class="hero-img-wrapper">
+                <img src="assets/splash_hero.webp" alt="StrikePoint AI Interface" class="hero-img">
+            </div>
+        </section>
+
+        <section id="intelligence" class="section">
+            <div class="section-header">
+                <h2>Intelligence Redefined</h2>
+                <p>We don't just wrap generic cloud APIs. We bring the cloud to the water.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <span class="pill">flutter_gemma</span>
+                    <div class="card-icon">🧠</div>
+                    <h3>Gemma 4 E2B On-Device</h3>
+                    <p>Experience zero-latency, 100% private inference. StrikePoint AI runs the state-of-the-art Gemma 4 E2B Instruct model natively on your phone's processor using the highly optimized flutter_gemma LiteRT engine.</p>
                 </div>
-                
-                <div class="hero-image-wrapper">
-                    <img src="assets/splash_hero.webp" alt="StrikePoint AI Map Interface" class="hero-image">
+
+                <div class="card">
+                    <span class="pill">EmbeddingGemma 300M</span>
+                    <div class="card-icon">🔥</div>
+                    <h3>Tactical AI Heatmap</h3>
+                    <p>We use the EmbeddingGemma 300M model to generate 768-dimensional Matryoshka vectors locally. Our engine runs complex cosine-similarity math against your history to literally glow the map where fish are biting.</p>
+                </div>
+
+                <div class="card">
+                    <span class="pill">SQLCipher AES-256</span>
+                    <div class="card-icon">🛡️</div>
+                    <h3>Absolute Privacy</h3>
+                    <p>Your waypoints and catches are strictly yours. All local databases are secured with military-grade AES-256 encryption. We have no backend. We cannot see your spots.</p>
                 </div>
             </div>
         </section>
 
-        <section class="features">
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📡</div>
-                    <h3>100% Offline Inference</h3>
-                    <p>Powered by our custom fllama engine. StrikePoint AI processes your queries entirely on-device. No signal required. Total privacy.</p>
+        <section id="telemetry" class="section" style="background: rgba(0,0,0,0.3); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+            <div class="grid-2">
+                <div>
+                    <span class="pill">The Context Engine</span>
+                    <h2 style="font-family: var(--font-heading); font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem;">28 Unique Data Sources.</h2>
+                    <p style="color: var(--text-muted); font-size: 1.15rem; margin-bottom: 2rem;">Our Retrieval-Augmented Generation (RAG) pipeline aggregates 14 external government APIs and 14 on-device telemetry engines to give the AI total situational awareness before it ever generates a single token.</p>
+                    
+                    <ul style="color: var(--text-muted); margin-left: 1.5rem; font-size: 1.05rem; line-height: 1.8;">
+                        <li><strong>Trip Mode:</strong> Offline caching of NOAA and CHS NONNA Bathymetry WMS tiles.</li>
+                        <li><strong>Zero-Shot Routing:</strong> Semantic classification prevents AI hallucination.</li>
+                        <li><strong>Offline Solunar:</strong> Major/Minor feeding windows calculated by astronomical algorithms.</li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🗺️</div>
-                    <h3>Intelligent Topography</h3>
-                    <p>Integrates with USGS streamflow, NOAA buoy data, and deep bathymetric charting to find the exact drop-offs holding fish.</p>
+
+                <div class="sources-grid">
+                    <div class="source-tag">USGS River Flow</div>
+                    <div class="source-tag">ECCC WaterOffice</div>
+                    <div class="source-tag">NOAA Tides</div>
+                    <div class="source-tag">CHS Tides</div>
+                    <div class="source-tag">USACE Reservoir Pools</div>
+                    <div class="source-tag">MODIS Water Clarity</div>
+                    <div class="source-tag">EPA Water Quality</div>
+                    <div class="source-tag">Open-Meteo Marine</div>
+                    <div class="source-tag">GBIF Biodiversity</div>
+                    <div class="source-tag">1,470+ Fishery DB</div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎣</div>
-                    <h3>Smart Catch Logging</h3>
-                    <p>Auto-correlates your catch photos with precise solunar phases, barometric pressure trends, and wind vector data.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2>Advanced Tooling</h2>
+            </div>
+            
+            <div class="grid-2">
+                <div class="card" style="text-align: center;">
+                    <div class="card-icon" style="font-size: 3.5rem;">📸</div>
+                    <h3>On-Device Fish ID</h3>
+                    <p>Identify over 100+ species of fish instantly using your camera. Our custom TFLite Vision classifier processes frames completely offline. No waiting for a cloud server while holding a fish.</p>
+                </div>
+                
+                <div class="card" style="text-align: center;">
+                    <div class="card-icon" style="font-size: 3.5rem;">💳</div>
+                    <h3>No Subscriptions</h3>
+                    <p>Enjoy a generous Free Tier containing the full offline atlas and catch logger. Want unlimited AI and tackle storage? It's a <strong>one-time $19.99 Pro unlock</strong>. We hate subscriptions as much as you do.</p>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Goodhope Technologies LLC. All rights reserved.</p>
-        <div style="margin-top: 1rem;">
-            <a href="help.html">Help Center</a> | 
-            <a href="privacy.html">Privacy Policy</a> | 
+        <h2>StrikePoint AI</h2>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">By Goodhope Technologies LLC</p>
+        
+        <div class="footer-links">
+            <a href="help.html">Help Center</a>
+            <a href="privacy.html">Privacy Policy</a>
             <a href="terms.html">Terms of Service</a>
         </div>
+        
+        <p class="copyright">&copy; 2026 Goodhope Technologies LLC. All rights reserved.</p>
     </footer>
 </body>
 </html>
