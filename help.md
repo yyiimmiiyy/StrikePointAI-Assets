@@ -40,12 +40,12 @@ The core of StrikePoint AI is the on-device Llama 3.2 engine. It is completely p
 - **Ask about your data:** "What was the water temperature the last time I caught a Bass here?"
 - **Battery Saver:** If you are running low on battery, enable **Low Power Mode** in settings to slightly reduce the AI's background processing.
 
-## 💳 Subscriptions & Quotas
+## 💳 Free Tier & Pro Unlock
 
 We believe in keeping the core logging experience completely free forever.
 
 - **Free Tier:** Log unlimited catches, save unlimited waypoints, and use the offline map. You get 30 free AI queries during your first week, and 7 free queries every week after that.
-- **Pro Unlock:** A one-time purchase of $19.99 unlocks **unlimited AI interactions** and unlimited tackle box storage forever. No monthly subscriptions.
+- **Pro Unlock:** A one-time purchase of $19.99 unlocks **unlimited AI interactions** and unlimited tackle box storage forever. There are **no monthly subscriptions**.
 
 ## 📞 Contact Support
 
