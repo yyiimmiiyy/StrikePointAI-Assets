@@ -63,7 +63,7 @@ StrikePoint AI does not use the cloud to process your questions. We run Google's
 Before the AI answers you, our Data Engine pulls from 28 unique sources.
 
 **Core AI Features:**
-- **OSM Hydrology Classifier:** The AI reads raw OpenStreetMap geometry to know exactly what type of water you are on. It will never tell you to fish for saltwater pelagics in an inland pond.
+- **USGS NHD & NRCan NHN Hydrology Classifier:** The AI reads raw public-domain ArcGIS geometry from federal and provincial hydrography networks to know exactly what type of water you are on. It will never tell you to fish for saltwater pelagics in an inland pond.
 - **NOAA MODIS Water Clarity:** Integrates federal ERDDAP APIs to fetch real-time chlorophyll-a concentrations, replacing basic rain heuristics with actual satellite truth.
 - **8-Layer Guard Chain:** Absolute safety. A relentless chain of stream validators ensures the AI refuses to give illegal or unregulated creel limit advice.
 - **Hardware-Adaptive Intelligence:** StrikePoint automatically profiles your device's RAM, seamlessly swapping massive 1B+ parameter models in and out of memory to prevent Out-Of-Memory (OOM) crashes on older hardware.
