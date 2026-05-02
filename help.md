@@ -18,7 +18,7 @@ Before the AI answers you, our Data Engine pulls from 28 unique environmental an
 
 **Core AI Features:**
 - **28-Source Context Aggregation Pipeline:** The engine aggregates data from USGS river flow rates, ECCC WaterOffice, EPA water quality, CHS/NOAA Tides, Open-Meteo Marine, and MODIS satellites. It employs dynamic heuristics like air-temperature regressions and 72-hour rain turbidity estimations when direct sensors are offline.
-- **Per-Water-Body Species Engine:** The AI cross-references your exact water body using a 3-tier lookup: an organic cache (live GBIF data), a bundled offline core DB (USACE/USBR reservoirs, tournament lakes, state top-25 waters), and live GBIF fallback. This includes live monitoring of USACE pool elevations.
+- **Per-Water-Body Species Engine:** The AI cross-references your exact water body using a 3-tier lookup: an organic cache of local species records, a bundled offline core database (major reservoirs, tournament lakes, state top-25 waters), and live regional fish occurrence data. This includes live monitoring of reservoir pool elevations.
 - **USGS NHD & NRCan NHN Hydrology Classifier:** The AI reads raw public-domain ArcGIS geometry from federal and provincial hydrography networks to classify your water type.
 - **Hardware-Adaptive Inference:** StrikePoint dynamically tiers token budgets (2048 vs 3072) and utilizes a persistent session KV cache to prevent `liblitertlm_jni` crashes on older hardware. A "noun-drift" cache strictly prevents repetitive LLM speech patterns.
 
