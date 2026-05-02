@@ -1,6 +1,6 @@
 # Privacy Policy — StrikePoint AI
 
-**Last Updated:** April 19, 2026
+**Last Updated:** April 22, 2026
 **Developer:** Goodhope Technologies LLC
 
 ---
@@ -51,7 +51,9 @@ environmental data aggregation, and waypoint logging.
 | River flow (USGS/ECCC) | No | Queried by station ID only — coordinates not transmitted¹ |
 | NOAA tides (US coasts) | No | Queried by station ID only — coordinates not transmitted¹ |
 | CHS tides (Canadian coasts) | No | Queried by CHS station code only — coordinates not transmitted¹ |
+| WMS Bathymetry Caching | Yes | When caching maps offline, geographic bounding boxes (BBOX) are sent to NOAA (US) or CHS NONNA (Canada) servers to fetch depth contours |
 | Waypoints and catch logs | No | Stored locally only, never transmitted |
+| Background atlas self-healing (GBIF) | Yes | When on Wi-Fi, `DataFreshnessService` sends activity centroids (50m-deduplicated, approximate — not exact catch coordinates) to the GBIF API to refresh nearby species occurrence data. These centroids are derived from your movement patterns, not your specific fishing spots. They are never linked to your identity because there is no user account |
 
 ¹ Station IDs are discovered on-device from the pre-bundled public hotspot atlas
 (52,929 rows of government-sourced gauge/tidal stations). No coordinates are sent to

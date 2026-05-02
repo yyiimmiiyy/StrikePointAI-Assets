@@ -1,6 +1,6 @@
 # Terms & Conditions — StrikePoint AI
 
-**Last Updated:** April 19, 2026
+**Last Updated:** April 22, 2026
 **Provider:** Goodhope Technologies LLC
 
 ---
@@ -111,8 +111,8 @@ damage, or navigation errors.
 
 ## 9. Governing Law
 
-These terms shall be governed in accordance with the laws of the jurisdiction where
-Goodhope Technologies LLC is registered, without regard to its conflict of law provisions.
+These terms shall be governed by the laws of the **State of Missouri**, without regard to
+its conflict of law provisions.
 
 ---
 
