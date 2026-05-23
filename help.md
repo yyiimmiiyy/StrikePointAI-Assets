@@ -97,13 +97,13 @@ When you ask the AI for advice, it analyzes live conditions and runs an advanced
 
 ---
 
-## 💾 Military-Grade Offline Portability (.spai Backups)
+## 💾 Encrypted Offline Portability (.spai Backups)
 Your waypoints and catches are strictly yours. StrikePoint provides true offline data portability without forcing you onto a cloud provider.
 
 **How to migrate devices off-grid:**
 1. Go to Settings > **Backup & Export**.
 2. Create a secure password.
-3. The app packages your database and images into a `.spai` archive, protected by military-grade encryption.
+3. The app packages your database and images into a `.spai` archive, protected by AES-256 encryption with a PBKDF2-HMAC-SHA256 derived key (100,000 iterations).
 4. Transfer this single encrypted file via Bluetooth or USB and import it instantly.
 
 ---
