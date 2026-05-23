@@ -18,7 +18,7 @@ Before the AI answers you, our Data Engine pulls from 28 unique environmental an
 
 **Core AI Features:**
 - **28-Source Context Aggregation Pipeline:** The engine aggregates data from live river flow rates, water quality sensors, ocean tides, marine weather, and satellite water clarity. It employs dynamic heuristics like air-temperature regressions and 72-hour rain turbidity estimations when direct sensors are offline.
-- **Per-Water-Body Species Engine:** The AI cross-references your exact water body using a 3-tier lookup: an organic cache of local species records, a bundled offline core database (major reservoirs, tournament lakes, state top-25 waters), and live regional fish occurrence data. This includes live monitoring of reservoir pool elevations.
+- **Per-Water-Body Species Engine:** The AI cross-references your exact water body through a multi-tier lookup: a local organic cache, a bundled offline core database (major reservoirs, tournament lakes, state top-25 waters), live regional fish occurrence data (Wi-Fi only), and regional inference fallback for waters with limited records. Includes live monitoring of reservoir pool elevations for Corps reservoirs.
 - **Federal Hydrology Classifier:** The AI reads raw public-domain geometry from national hydrography networks to classify your water type.
 - **Hardware-Adaptive Intelligence:** StrikePoint automatically scales its AI engine to fit your phone's memory, ensuring stable, crash-free performance even on older devices. A built-in conversation engine prevents repetitive or robotic responses.
 
@@ -44,6 +44,18 @@ StrikePoint utilizes a highly optimized offline database to store and retrieve e
 - **Knots & Rigs Mastery:** Step-by-step guidance for tying the right knot for the right presentation.
 - **Match-the-Hatch Forage Diets:** Regional forage data to perfectly match local baitfish.
 - **Seasonal Behavior Matrices:** Temperature and thermocline-driven fish behavior predictions.
+
+---
+
+## ✅ Why You Can Trust the Species Data
+
+When StrikePoint shows you species at a water, those species are **verified** — backed by physical museum specimens or multiple independent scientific observations. We show what's actually documented to live there, not what someone said they caught.
+
+The species database draws from federal reservoir surveys, university museum collections, threatened and endangered species records, federal hatchery stocking data, and research-grade scientific observations. Every entry has earned its place through rigorous vetting.
+
+**Invasive species warnings** are only shown when a species is federally confirmed as established in the wild — stocked sportfish like rainbow trout or walleye are never flagged.
+
+**The data improves over time.** The waters you check most often get automatic live refreshes from the scientific observation network — without you uploading anything.
 
 ---
 
@@ -99,7 +111,7 @@ Your waypoints and catches are strictly yours. StrikePoint provides true offline
 ## 💳 Pricing & Subscriptions
 We hate subscriptions. You own your tools.
 
-- **Free Tier:** Log unlimited catches, save unlimited waypoints, use the offline map, and access the AI Tactical Heatmap. You get 30 free AI queries during your first week, and 7 free queries every week after that.
+- **Free Tier:** Log unlimited catches, save unlimited waypoints, use the offline map, and access the AI Tactical Heatmap. You get 30 free AI queries during your first 7 days after install, then 7 free queries per rolling 7-day window after that. The rolling window advances automatically with each query.
 - **Pro Unlock ($19.99):** A one-time purchase unlocks unlimited Gemma 4 E2B AI interactions, unlimited tackle box storage, the 7-Day Strike Forecast, Deep Catch Analytics, and Advanced Log Filtering.
 
 **Offline Purchase Verification:** StrikePoint securely verifies your App Store purchase directly on your device. You will never get locked out of your premium tools just because you lost cell service.

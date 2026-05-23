@@ -1,6 +1,6 @@
 # Privacy Policy — StrikePoint AI
 
-**Last Updated:** April 22, 2026
+**Last Updated:** May 23, 2026
 **Developer:** Goodhope Technologies LLC
 
 ---
@@ -44,9 +44,9 @@ environmental data aggregation, and waypoint logging.
 | Weather forecast | Yes | Sent to Open-Meteo API to return your local forecast |
 | EPA water quality | Yes | Sent to EPA WQX API to find nearest monitoring station |
 | Air quality index | Yes | Sent to Open-Meteo AQI API |
-| Biodiversity occurrences | Yes | Sent to GBIF API as a bounding box |
-| Nearby water bodies | Yes | Sent to OpenStreetMap Overpass API |
-| Reverse geocoding | Yes | Sent to Nominatim API to resolve water body name |
+| Biodiversity occurrences (per-water species lookup) | Yes | When on Wi-Fi only, sends a small bounding box around a tapped water to public-domain biodiversity APIs (GBIF, optionally iNaturalist) to enrich species data. Capped at 30 lookups per app session and 24-hour TTL — repeat lookups reuse the local cache. No account, no tracking, no PII attached. |
+| Nearby water bodies | Yes | Sent to USGS National Hydrography Dataset WFS (US, public-domain federal) and NRCan National Hydro Network WFS (Canada, OGL) — OpenStreetMap Overpass was removed in v3.46. |
+| Reverse geocoding | Yes | Sent to USGS NHD (US) / NRCan NHN (Canada) to resolve the closest named water body — same public-domain federal endpoints as the nearby water bodies lookup. No OSM, no Nominatim, no GeoNames. |
 | Offline marine conditions | Yes | Sent to Open-Meteo Marine API |
 | River flow (USGS/ECCC) | No | Queried by station ID only — coordinates not transmitted¹ |
 | NOAA tides (US coasts) | No | Queried by station ID only — coordinates not transmitted¹ |
@@ -54,15 +54,18 @@ environmental data aggregation, and waypoint logging.
 | WMS Bathymetry Caching | Yes | When caching maps offline, geographic bounding boxes (BBOX) are sent to NOAA (US) or CHS NONNA (Canada) servers to fetch depth contours |
 | Waypoints and catch logs | No | Stored locally only, never transmitted |
 | Background atlas self-healing (GBIF) | Yes | When on Wi-Fi, `DataFreshnessService` sends activity centroids (50m-deduplicated, approximate — not exact catch coordinates) to the GBIF API to refresh nearby species occurrence data. These centroids are derived from your movement patterns, not your specific fishing spots. They are never linked to your identity because there is no user account |
+| Map-driven species pre-cache (GBIF) | Yes | **Off by default.** When you opt in via Settings → "Pre-cache species when panning the map", the app sends the visible water-body bounding box to GBIF on Wi-Fi only to enrich species data for waters you scrolled past. Rate-limited to 5 water bodies per minute. Persisted under the local `map_species_pre_cache_enabled` flag; toggle off at any time to stop these requests |
 
 ¹ Station IDs are discovered on-device from the pre-bundled public hotspot atlas
-(52,929 rows of government-sourced gauge/tidal stations). No coordinates are sent to
-USGS, NOAA, ECCC, or CHS for that discovery step.
+(31,379 rows of government-sourced gauge/tidal/access-point data, including 14,094
+USGS gauges, 156 ECCC gauges, and 9 CHS tidal stations among other access types). No
+coordinates are sent to USGS, NOAA, ECCC, or CHS for that discovery step.
 
 When coordinates are transmitted to third-party APIs, they are used only to return
 environmental data for your current session. Goodhope Technologies LLC does not retain, sell, or
-share these coordinates. The third-party services (Open-Meteo, EPA, GBIF, OpenStreetMap,
-Nominatim) have their own privacy policies governing momentary request processing.
+share these coordinates. The third-party services (Open-Meteo, EPA, GBIF, iNaturalist,
+USGS NHD, NRCan NHN, NOAA, Environment Canada, USACE) have their own privacy policies
+governing momentary request processing.
 
 ---
 
@@ -130,31 +133,22 @@ to our servers. Purchasing the Pro lifetime unlock removes this limit permanentl
 
 ### Environmental Data APIs
 When you are online, StrikePoint AI fetches real-time environmental data from public APIs
-(Open-Meteo, USGS, EPA WQX, OpenStreetMap, GBIF, Environment Canada, Nominatim). Your
+(Open-Meteo, USGS NHD, NRCan NHN, EPA WQX, GBIF, iNaturalist, Environment Canada, NOAA, USACE). Your
 approximate GPS coordinates may be included in these requests as described in Section 2.
 GBIF biodiversity occurrence data is licensed under CC-BY and is attributed accordingly
 within the app.
 
-### Firebase Analytics
-We use **Google Firebase Analytics** to track aggregate, anonymous app-level events:
-`purchase_success`, `paywall_view`, and `app_open`. These events do not include your GPS
-coordinates, catch data, photos, or any personally identifiable information.
+### Analytics & Crash Reporting — REMOVED
+**As of v3.46.5 (2026-05-02), StrikePoint AI sends no usage analytics and no crash
+reports off-device.** The previous Firebase Analytics + Firebase Crashlytics integrations
+were removed entirely. There is no third-party analytics service, no anonymous event
+collection, and no remote crash reporting. All errors are logged to the local device-only
+logger (which redacts PII including GPS coordinates, SQLCipher keys, and auth tokens
+before writing) and never transmitted.
 
-You can disable analytics collection at any time under **Settings → Privacy → Usage
-Analytics**. When disabled, no events are buffered or transmitted — the setting takes
-effect immediately and persists across app restarts.
-
-### Firebase Crashlytics
-We use **Google Firebase Crashlytics** to collect anonymous crash reports when the app
-encounters an unexpected error. Reports contain a stack trace, device model, OS version,
-and app version. They do not contain your catch data, GPS coordinates, photos, or any
-personally identifiable information.
-
-You can disable crash reporting at any time under **Settings → Privacy → Crash Reporting**.
-When disabled, no crash data is uploaded. The setting takes effect immediately and
-persists across app restarts.
-
-Both Firebase services are subject to [Google's Privacy Policy](https://policies.google.com/privacy).
+The corresponding **Settings → Privacy** toggles were also removed because there is
+nothing left to opt out of. The single source of truth for what does/doesn't leave the
+device is this document.
 
 ### App Stores (Apple & Google)
 Payments are processed entirely through the Apple App Store or Google Play Store. Payment
@@ -176,9 +170,7 @@ Because you control 100% of your fishing data:
 
 - **Delete records:** Navigate to Settings → Data & Diagnostics → Clear AI Chat History to
   remove AI conversations. Uninstalling the app permanently destroys all locally stored data.
-- **Disable analytics:** Settings → Privacy → Usage Analytics (off = zero data collected).
-- **Disable crash reporting:** Settings → Privacy → Crash Reporting (off = zero data
-  uploaded).
+- **Analytics + crash reporting:** Removed entirely as of v3.46.5 — nothing to opt out of.
 - **Export your data:** Use Backup & Restore to create an encrypted portable archive before
   switching devices.
 
