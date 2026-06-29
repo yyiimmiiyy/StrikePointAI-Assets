@@ -1,6 +1,6 @@
 # Privacy Policy — StrikePoint AI
 
-**Last Updated:** May 23, 2026
+**Last Updated:** June 16, 2026
 **Developer:** Goodhope Technologies LLC
 
 ---
@@ -44,26 +44,26 @@ environmental data aggregation, and waypoint logging.
 | Weather forecast | Yes | Sent to Open-Meteo API to return your local forecast |
 | EPA water quality | Yes | Sent to EPA WQX API to find nearest monitoring station |
 | Air quality index | Yes | Sent to Open-Meteo AQI API |
-| Biodiversity occurrences (per-water species lookup) | Yes | When on Wi-Fi only, sends a small bounding box around a tapped water to public-domain biodiversity APIs (GBIF, optionally iNaturalist) to enrich species data. Capped at 30 lookups per app session and 24-hour TTL — repeat lookups reuse the local cache. No account, no tracking, no PII attached. |
+| Biodiversity occurrences (per-water species lookup) | Yes | When on Wi-Fi only, sends a small bounding box around a tapped water to the public-domain GBIF biodiversity API to enrich species data. Capped at 30 lookups per app session and 24-hour TTL — repeat lookups reuse the local cache. No account, no tracking, no PII attached. |
 | Nearby water bodies | Yes | Sent to USGS National Hydrography Dataset WFS (US, public-domain federal) and NRCan National Hydro Network WFS (Canada, OGL) — OpenStreetMap Overpass was removed in v3.46. |
-| Reverse geocoding | Yes | Sent to USGS NHD (US) / NRCan NHN (Canada) to resolve the closest named water body — same public-domain federal endpoints as the nearby water bodies lookup. No OSM, no Nominatim, no GeoNames. |
+| Reverse geocoding | Yes | Sent to USGS NHD (US) / NRCan NHN (Canada) to resolve the closest named water body — same public-domain federal endpoints as the nearby water bodies lookup. No OpenStreetMap, no Nominatim, no GeoNames. |
 | Offline marine conditions | Yes | Sent to Open-Meteo Marine API |
 | River flow (USGS/ECCC) | No | Queried by station ID only — coordinates not transmitted¹ |
 | NOAA tides (US coasts) | No | Queried by station ID only — coordinates not transmitted¹ |
 | CHS tides (Canadian coasts) | No | Queried by CHS station code only — coordinates not transmitted¹ |
 | WMS Bathymetry Caching | Yes | When caching maps offline, geographic bounding boxes (BBOX) are sent to NOAA (US) or CHS NONNA (Canada) servers to fetch depth contours |
 | Waypoints and catch logs | No | Stored locally only, never transmitted |
-| Background atlas self-healing (GBIF) | Yes | When on Wi-Fi, `DataFreshnessService` sends activity centroids (50m-deduplicated, approximate — not exact catch coordinates) to the GBIF API to refresh nearby species occurrence data. These centroids are derived from your movement patterns, not your specific fishing spots. They are never linked to your identity because there is no user account |
+| Background species self-healing (GBIF) | Yes | When on Wi-Fi (and at most every 90 days), `DataFreshnessService` refreshes the species lists for your most-queried named waters by sending each water's coordinates to the public-domain GBIF API. It never modifies the bundled hotspot atlas and is never linked to your identity because there is no user account |
 | Map-driven species pre-cache (GBIF) | Yes | **Off by default.** When you opt in via Settings → "Pre-cache species when panning the map", the app sends the visible water-body bounding box to GBIF on Wi-Fi only to enrich species data for waters you scrolled past. Rate-limited to 5 water bodies per minute. Persisted under the local `map_species_pre_cache_enabled` flag; toggle off at any time to stop these requests |
 
 ¹ Station IDs are discovered on-device from the pre-bundled public hotspot atlas
-(31,379 rows of government-sourced gauge/tidal/access-point data, including 14,094
-USGS gauges, 156 ECCC gauges, and 9 CHS tidal stations among other access types). No
+(32,653 rows of government-sourced gauge/tidal/access-point data, including 13,520
+USGS gauges, 155 ECCC gauges, and 9 CHS tidal stations among other access types). No
 coordinates are sent to USGS, NOAA, ECCC, or CHS for that discovery step.
 
 When coordinates are transmitted to third-party APIs, they are used only to return
 environmental data for your current session. Goodhope Technologies LLC does not retain, sell, or
-share these coordinates. The third-party services (Open-Meteo, EPA, GBIF, iNaturalist,
+share these coordinates. The third-party services (Open-Meteo, EPA, GBIF,
 USGS NHD, NRCan NHN, NOAA, Environment Canada, USACE) have their own privacy policies
 governing momentary request processing.
 
@@ -77,7 +77,7 @@ pipeline runs on your device:
 - The photo is compressed and centre-cropped to a 4:5 portrait format **on-device** in a
   background isolate.
 - If the optional fish-classifier model is bundled with your build, species classification
-  runs locally via TensorFlow Lite. The image is resized to 224×224, the inference runs
+  runs locally via TensorFlow Lite. The image is resized to 384×384, the inference runs
   inside a sandboxed isolate, and the result (top species + confidence) is returned to the
   UI without any network call.
 - **Photos and inference results are never uploaded.** Goodhope Technologies LLC has no servers that
@@ -133,7 +133,7 @@ to our servers. Purchasing the Pro lifetime unlock removes this limit permanentl
 
 ### Environmental Data APIs
 When you are online, StrikePoint AI fetches real-time environmental data from public APIs
-(Open-Meteo, USGS NHD, NRCan NHN, EPA WQX, GBIF, iNaturalist, Environment Canada, NOAA, USACE). Your
+(Open-Meteo, USGS NHD, NRCan NHN, EPA WQX, GBIF, Environment Canada, NOAA, USACE). Your
 approximate GPS coordinates may be included in these requests as described in Section 2.
 GBIF biodiversity occurrence data is licensed under CC-BY and is attributed accordingly
 within the app.

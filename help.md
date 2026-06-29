@@ -11,6 +11,21 @@ This guide covers the advanced features, how to use them, and how they function 
 
 ---
 
+## 📥 First Launch: The One-Time Model Download
+
+The AI engine lives on your phone, which means it has to get there once. On first launch
+StrikePoint downloads two model files in the background:
+
+- **The Gemma 4 AI model** (~3.1 GB) — the brain behind the chat guide.
+- **The retrieval model** (~180 MB) — powers on-device semantic search across your tackle
+  box, catch history, and the knowledge base.
+
+**Use Wi-Fi for the first launch.** Both downloads are integrity-verified, survive app
+updates, and never need to be repeated. Everything else in the app — map, catch logging,
+solunar times, hotspot atlas — works immediately while the models download.
+
+---
+
 ## 🤖 The Tactical AI Engine (Gemma 4)
 StrikePoint AI does not use the cloud to process your questions. We run an advanced artificial intelligence directly on your device, ensuring total privacy and offline capability.
 
@@ -28,7 +43,7 @@ Before the AI answers you, our Data Engine pulls from 28 unique environmental an
 StrikePoint is far more than a basic chatbot. It uses a network of specialized background systems to guarantee speed and accuracy.
 
 - **Smart Query Routing & Precision Math:** Instead of guessing, the system instantly categorizes your questions and uses precise math to calculate distances and solunar times, preventing mistakes.
-- **Autonomous Agents:** The AI is equipped with 12 read-only tools. It can autonomously search the hotspot database, query your catch history, pull species biology, and fetch on-demand weather, tides, and river flows without asking for permission.
+- **Autonomous Agents:** The AI is equipped with 13 read-only tools. It can autonomously search the hotspot database, query your catch history, pull species biology, and fetch on-demand weather, tides, and river flows without asking for permission.
 - **Efficient Processing:** Quickly handles simple greetings and irrelevant questions before they trigger the main data engine, preserving your device's battery life.
 - **Absolute Safety:** A relentless chain of validators ensures the AI refuses to give illegal or unregulated creel limit advice.
 - **Smart Notification Filtering:** The UI filters actionable alerts (like `📡 Offline Mode` or weather shifts) against previous messages so you are never spammed with repetitive information.
@@ -78,6 +93,70 @@ StrikePoint AI allows you to cache massive blocks of map data directly to your d
 3. If you have the **Bathymetry Layer** enabled (the topography icon), the app will natively download official NOAA (US) or CHS (Canada) depth contours alongside the standard map tiles—without relying on any restrictive 3rd-party mapping services.
 4. Tap **Download**.
 
+**Built-in depth contours — no download required.** StrikePoint also ships over 100,000
+offline depth-contour zones inside the app: the Great Lakes, US coastal waters, and
+surveyed inland lakes and reservoirs, all from public-domain federal survey data. The AI
+guide reads this same depth data when you ask for tackle or location advice — it knows the
+depth where you're standing and the nearest drop-off within casting range, fully offline.
+
+---
+
+## 🚗 Trip Mode (Drive-to-the-Lake Automation)
+
+Trip Mode turns the drive to a new water into automatic preparation. Activate it from the
+map screen before you leave:
+
+- **Automatic map caching while you drive.** A persistent notification keeps the app awake
+  so the topographic maps (and depth contours, if the bathymetry layer is on) for each new
+  area silently download in the background. Lose signal at the lake — the map still works.
+- **5-mile tripwire.** Every time you travel roughly 5 miles, StrikePoint re-centers its
+  caching and re-schedules your solunar prime-window notifications for the new location.
+- **Auto-expiry.** Trip Mode quietly shuts itself off after 24 hours so it never drains
+  your battery in the background.
+
+On Xiaomi / Samsung / OnePlus phones, enable "Autostart" and disable "Battery Saver" for
+StrikePoint AI in system settings, or the OS may kill the download service mid-drive.
+
+---
+
+## 🔥 AI Tactical Heatmap (Pro)
+
+The heatmap turns a map full of pins into a scored hit list. Toggle it with the flame
+button on the map screen (Pro unlock required):
+
+- Every visible public hotspot **and every private waypoint you've saved** is scored
+  on-device against live conditions — solunar window, moon phase, barometric pressure
+  trend, water temperature, wind, and cloud cover.
+- Your proven catch spots score highest; river gauge hotspots fold in **live USGS flow
+  data** fetched in a single batched call.
+- High-probability spots glow; low-confidence spots dim. Because the math runs on your
+  phone, the heatmap keeps working after you lose signal.
+
+---
+
+## 📈 Strike Forecast & Catch Analytics
+
+- **7-Day Strike Forecast:** Weather-adjusted daily strike scores with a full solunar
+  window drilldown per day (PAST / NOW / SOON markers on today's card). Computed entirely
+  offline from solar + solunar math and cached weather. Today and tomorrow are free; days
+  3–7 are part of the Pro unlock.
+- **Conditions Intelligence:** Every catch you log auto-captures a full environmental
+  snapshot — barometric pressure and trend, water temperature, wind, river flow, moon
+  phase, solunar period, and cloud cover. Your analytics dashboard turns that history into
+  personal patterns (your best pressure trends, water temps, and solunar windows). This
+  data never leaves your device. Deep Catch Analytics and Advanced Log Filtering are Pro
+  features.
+
+---
+
+## 🏆 Trophy Cards (Share the Catch, Not the Spot)
+
+Share any logged catch as a rendered trophy card from the catch log. The card is generated
+by rasterizing a fresh image — the original photo file, with its embedded GPS metadata,
+never enters the share payload, so your spot structurally cannot leak. Exact coordinates
+and precise water body names are excluded. You share through the normal OS share sheet to
+any app you choose; no StrikePoint servers are involved.
+
 ---
 
 ## 📸 On-Device Vision (100+ Class Fish ID)
@@ -111,8 +190,8 @@ Your waypoints and catches are strictly yours. StrikePoint provides true offline
 ## 💳 Pricing & Subscriptions
 We hate subscriptions. You own your tools.
 
-- **Free Tier:** Log unlimited catches, save unlimited waypoints, use the offline map, and access the AI Tactical Heatmap. You get 30 free AI queries during your first 7 days after install, then 7 free queries per rolling 7-day window after that. The rolling window advances automatically with each query.
-- **Pro Unlock ($19.99):** A one-time purchase unlocks unlimited Gemma 4 E2B AI interactions, unlimited tackle box storage, the 7-Day Strike Forecast, Deep Catch Analytics, and Advanced Log Filtering.
+- **Free Tier:** Log unlimited catches, save unlimited waypoints, use the offline map and hotspot atlas, and store up to 10 tackle box items. You get 30 free AI queries during your first 7 days after install, then 7 free queries per rolling 7-day window after that. The rolling window advances automatically with each query. The first two days of the Strike Forecast are free.
+- **Pro Unlock ($19.99):** A one-time purchase unlocks unlimited Gemma 4 E2B AI interactions, unlimited tackle box storage, the AI Tactical Heatmap, the full 7-Day Strike Forecast, Deep Catch Analytics, and Advanced Log Filtering.
 
 **Offline Purchase Verification:** StrikePoint securely verifies your App Store purchase directly on your device. You will never get locked out of your premium tools just because you lost cell service.
 
